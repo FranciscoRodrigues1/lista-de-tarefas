@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import './App.css'
-import TarefaLista from './components/TarefaLista'
+import Footer from './components/Footer/Footer'
+import Header from './components/Header/Header'
+import Main from './components/Main/Main'
 
 function App() {
   const [texto, setTexto] = useState('')
@@ -41,30 +42,18 @@ function App() {
   }
 
   return (
-    <main className="app">
-      <h1>Minha Lista de Tarefas</h1>
-      <p className="subtitulo">Anote o que precisa estudar ou entregar.</p>
-
-      <form className="formulario" onSubmit={adicionarTarefa}>
-        <label htmlFor="tarefa">Nova tarefa</label>
-        <div className="linha-formulario">
-          <input
-            id="tarefa"
-            type="text"
-            value={texto}
-            onChange={(evento) => setTexto(evento.target.value)}
-            placeholder="Ex.: estudar matemática"
-          />
-          <button type="submit">Adicionar</button>
-        </div>
-      </form>
-
-      <TarefaLista
+    <div className="app-shell">
+      <Header />
+      <Main
+        texto={texto}
+        onTextoChange={(evento) => setTexto(evento.target.value)}
         tarefas={tarefas}
+        onSubmit={adicionarTarefa}
         onAlternarConcluida={alternarConcluida}
         onExcluirTarefa={excluirTarefa}
       />
-    </main>
+      <Footer />
+    </div>
   )
 }
 
