@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import TarefaLista from './components/TarefaLista'
 
 function App() {
   const [texto, setTexto] = useState('')
@@ -58,31 +59,11 @@ function App() {
         </div>
       </form>
 
-      <section className="lista" aria-live="polite">
-        <h2>Tarefas</h2>
-
-        {tarefas.length === 0 ? (
-          <p className="vazia">Nenhuma tarefa ainda. Digite uma e clique em Adicionar.</p>
-        ) : (
-          <ul>
-            {tarefas.map((tarefa) => (
-              <li key={tarefa.id} className={tarefa.concluida ? 'concluida' : ''}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={tarefa.concluida}
-                    onChange={() => alternarConcluida(tarefa.id)}
-                  />
-                  <span>{tarefa.texto}</span>
-                </label>
-                <button type="button" onClick={() => excluirTarefa(tarefa.id)}>
-                  Excluir
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <TarefaLista
+        tarefas={tarefas}
+        onAlternarConcluida={alternarConcluida}
+        onExcluirTarefa={excluirTarefa}
+      />
     </main>
   )
 }
